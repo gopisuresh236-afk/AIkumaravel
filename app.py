@@ -3,7 +3,7 @@ from flask import Flask, request, render_template_string
 app = Flask(__name__)
 
 knowledge_base = {}
-TEACH_PASSWORD = "admin123"
+TEACH_PASSWORD = "Anna2026!"
 
 html = """
 <!DOCTYPE html>
@@ -20,7 +20,7 @@ button:hover { background: #025aa5; }
 </head>
 <body>
 
-<h2>AI Chatbot (Learnable)</h2>
+<h2> Dr Kumaravel Govindharasu AI  (UTAS - Ibri)</h2>
 
 <div class="chat" id="chat">{{chat|safe}}</div>
 
