@@ -35,8 +35,8 @@ h2 { display: flex; align-items: center; gap: 10px; }
 <body>
 
 <h2>
-    <img src="/static/logo.png" alt="AI Logo" width="100" height="100">
-    Dr Kumaravel Govindharasu - KumBot AI (University of Technology and Applied Sciences, ibri, Sultanate of Oman)
+   
+       Dr Kumaravel Govindharasu - KumBot AI (UTAS, ibri, Sultanate of Oman)
 </h2>
 
 <div class="chat" id="chat">{{chat|safe}}</div>
@@ -131,3 +131,4 @@ def home():
 # ------------------- RUN APP -------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
