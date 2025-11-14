@@ -19,7 +19,7 @@ button:hover { background: #025aa5; }
 </style>
 </head>
 <body>
-<img src="logo.png" alt="AI Logo" width="100" height="36">
+<h2><img src="logo.png" alt="AI Logo" width="100" height="36"><h2>
 <h2>Dr Kumaravel Govindharasu - AI child (UTAS-Ibri)</h2>
 
 <div class="chat" id="chat">{{chat|safe}}</div>
