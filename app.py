@@ -3,7 +3,7 @@ from flask import Flask, request, render_template_string
 app = Flask(__name__)
 
 knowledge_base = {}
-TEACH_PASSWORD = "admin123"   # Change your password here
+TEACH_PASSWORD = "admin123"
 
 html = """
 <!DOCTYPE html>
@@ -13,19 +13,8 @@ html = """
 <style>
 body { font-family: Arial; padding: 20px; max-width: 600px; margin: auto; }
 input, button { padding: 10px; margin-top: 10px; width: 100%; }
-.chat {
-    border: 1px solid #aaa;
-    padding: 15px;
-    height: 300px;
-    overflow-y: scroll;
-    background: #f7f7f7;
-}
-button {
-    background: #0275d8;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+.chat { border: 1px solid #aaa; padding: 15px; height: 300px; overflow-y: scroll; background: #f7f7f7; }
+button { background: #0275d8; color: white; border: none; cursor: pointer; }
 button:hover { background: #025aa5; }
 </style>
 </head>
@@ -55,35 +44,31 @@ button:hover { background: #025aa5; }
 
 chat_history = ""
 
+def get_response(user_input):
+    user_input = user_input.lower()
+    if user_input in knowledge_base:
+        return knowledge_base[user_input]
+    for key, value in knowledge_base.items():
+        for word in key.split():
+            if word in user_input:
+                return value
+    return "I don't know the answer. Please teach me!"
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     global chat_history
-
     show_password = False
-
     if request.method == "POST":
         action = request.form["action"]
-
-        # --------------- ASK ----------------
         if action == "ask":
-            msg = request.form["message"].lower()
-
-            if msg in knowledge_base:
-                ans = knowledge_base[msg]
-            else:
-                ans = "I don't know the answer. Please teach me!"
-
+            msg = request.form["message"]
+            ans = get_response(msg)
             chat_history += f"You: {msg}<br>Bot: {ans}<br><br>"
-
-        # --------------- SHOW TEACH PASSWORD BOX --------------
         elif action == "teach_request":
             show_password = True
-
-        # --------------- TEACH WITH PASSWORD ---------------
         elif action == "teach":
             pwd = request.form["password"]
             teach_data = request.form["teach_data"]
-
             if pwd != TEACH_PASSWORD:
                 chat_history += "Bot: ❌ Incorrect password!<br><br>"
             else:
@@ -93,7 +78,6 @@ def home():
                     chat_history += "Bot: ✔ I learned the new answer!<br><br>"
                 else:
                     chat_history += "Bot: Use correct format → question = answer<br><br>"
-
     return render_template_string(html, chat=chat_history, show_password=show_password)
 
 if __name__ == "__main__":
