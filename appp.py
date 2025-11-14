@@ -36,7 +36,7 @@ h2 { display: flex; align-items: center; gap: 10px; }
 
 <h2>
    
-       Dr Kumaravel Govindharasu - KumBot AI (UTAS, ibri, Sultanate of Oman)
+       Dr Kumaravel Govindharasu - KuBo AI (UTAS, ibri, Sultanate of Oman)
 </h2>
 
 <div class="chat" id="chat">{{chat|safe}}</div>
@@ -131,4 +131,5 @@ def home():
 # ------------------- RUN APP -------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
+
 
